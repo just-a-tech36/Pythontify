@@ -1,27 +1,26 @@
-# Pythontify
+Pythontify
 
 I got tired of opening Spotify just to listen to music while coding, so I built this — a music player that lives entirely in the terminal. Arrow keys to browse, Enter to play. That's it.
 
-![Python](https://img.shields.io/badge/Python-3.6+-blue?logo=python&logoColor=white)
-![Platform](https://img.shields.io/badge/Platform-Linux-orange?logo=linux&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green)
+Show Image
+Show Image
+Show Image
 
----
 
-## What it does
+What it does
 
-- Scans your music folder and lists every `.mp3` it finds
-- Arrow keys to navigate, Enter to play, S to stop
-- Progress bar that shows how far into a song you are
-- Music keeps playing while you scroll around the list
-- Autoplay — when a song ends it moves on to the next one and loops
-- Shuffle mode to mix things up
 
----
+Scans your music folder and lists every .mp3 it finds
+Arrow keys to navigate, Enter to play, S to stop
+Progress bar that shows how far into a song you are
+Music keeps playing while you scroll around the list
+Autoplay — when a song ends it moves on to the next one and loops
+Shuffle mode to mix things up
 
-## Preview
 
-```
+
+Preview
+
  PYTHONTIFY  [SHUFFLE]
  ▶  stairway_to_heaven.mp3  [########--------]  02:47 / 08:02
 ────────────────────────────────────────────────────────────────
@@ -32,67 +31,44 @@ I got tired of opening Spotify just to listen to music while coding, so I built 
 ────────────────────────────────────────────────────────────────
   Now playing: stairway_to_heaven.mp3
  [↑↓] Move  [Enter] Play  [S] Stop  [X] Shuffle  [Q] Quit
-```
 
----
 
-## Setup
+Setup
 
 You need Python 3.6+ (already on most Linux systems) and one of these audio players — Pythontify picks whichever one it finds first:
 
-| Player | Install |
-|--------|---------|
-| `mpg123` | `sudo apt install mpg123` |
-| `mpv` | `sudo apt install mpv` |
-| `vlc` | `sudo apt install vlc` |
-| `ffplay` | `sudo apt install ffmpeg` |
+PlayerInstallmpg123sudo apt install mpg123mpvsudo apt install mpvvlcsudo apt install vlcffplaysudo apt install ffmpeg
 
 For the progress bar to show actual song duration, also install ffmpeg:
 
-```bash
-sudo apt install ffmpeg
-```
+bashsudo apt install ffmpeg
 
----
 
-## Running it
+Running it
 
-```bash
-git clone https://github.com/just-a-tech36/Pythontify.git
+bashgit clone https://github.com/just-a-tech36/Pythontify.git
 cd Pythontify
-python3 pythontify.py
-```
+python3 "#Pythontify.py"
 
-Before running, open `pythontify.py` and set `MUSIC_DIR` to wherever your music lives:
+Before running, open #Pythontify.py and set MUSIC_DIR to wherever your music lives:
 
-```python
-MUSIC_DIR = "/your/music/folder"
-```
+pythonMUSIC_DIR = "/your/music/folder"
 
----
 
-## Controls
+Controls
 
-| Key | Action |
-|-----|--------|
-| `↑` / `↓` | Move through the list |
-| `Enter` | Play selected song |
-| `S` | Stop |
-| `X` | Toggle shuffle |
-| `Q` | Quit |
+KeyAction↑ / ↓Move through the listEnterPlay selected songSStopXToggle shuffleQQuit
 
----
 
-## How it's built
+How it's built
 
-It uses Python's built-in `curses` module to draw the UI directly in the terminal. The screen refreshes every 500ms so the progress bar ticks forward without you having to press anything, and the music runs as a background process so the UI stays responsive while something's playing.
+It uses Python's built-in curses module to draw the UI directly in the terminal. The screen refreshes every 500ms so the progress bar ticks forward without you having to press anything, and the music runs as a background process so the UI stays responsive while something's playing.
 
 When a song finishes, it looks up the current track's position in the queue, moves to the next one, and starts it automatically. If shuffle is on, the queue is randomized — toggle it off and it resets back to alphabetical order.
 
-No pip installs. No virtual environment. Everything except `ffmpeg` is standard library.
+No pip installs. No virtual environment. Everything except ffmpeg is standard library.
 
----
 
-## License
+License
 
 MIT — do whatever you want with it.
