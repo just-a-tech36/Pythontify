@@ -14,30 +14,31 @@ I got tired of opening Spotify just to listen to music while coding, so I built 
 - Arrow keys to navigate, Enter to play, S to stop
 - Progress bar that shows how far into a song you are
 - Music keeps playing while you scroll around the list
-- Simple sign-up screen before you get in (email + code)
+- Autoplay — when a song ends it moves on to the next one and loops
+- Shuffle mode to mix things up
 
 ---
 
 ## Preview
 
 ```
- MUSIC PLAYLIST
- >> bohemian_rhapsody.mp3  [########--------]  01:23 / 05:54
---------------------------------------------------------------
+ PYTHONTIFY  [SHUFFLE]
+ ▶  stairway_to_heaven.mp3  [########--------]  02:47 / 08:02
+────────────────────────────────────────────────────────────────
      1. bohemian_rhapsody.mp3
      2. hotel_california.mp3
-  >> 3. stairway_to_heaven.mp3
+  ▶  3. stairway_to_heaven.mp3
      4. imagine.mp3
---------------------------------------------------------------
+────────────────────────────────────────────────────────────────
   Now playing: stairway_to_heaven.mp3
- [Up/Down] Navigate  [Enter] Play  [S] Stop  [Q] Quit
+ [↑↓] Move  [Enter] Play  [S] Stop  [X] Shuffle  [Q] Quit
 ```
 
 ---
 
 ## Setup
 
-You need Python 3.6+ (already on most Linux systems) and one of these audio players:
+You need Python 3.6+ (already on most Linux systems) and one of these audio players — Pythontify picks whichever one it finds first:
 
 | Player | Install |
 |--------|---------|
@@ -46,7 +47,7 @@ You need Python 3.6+ (already on most Linux systems) and one of these audio play
 | `vlc` | `sudo apt install vlc` |
 | `ffplay` | `sudo apt install ffmpeg` |
 
-Pythontify just picks whichever one you already have. If you want the progress bar to show the actual song duration, also install ffmpeg:
+For the progress bar to show actual song duration, also install ffmpeg:
 
 ```bash
 sudo apt install ffmpeg
@@ -57,14 +58,12 @@ sudo apt install ffmpeg
 ## Running it
 
 ```bash
-git clone https://github.com/yourusername/pythontify.git
-cd pythontify
-python3 music_app.py
+git clone https://github.com/just-a-tech36/Pythontify.git
+cd Pythontify
+python3 pythontify.py
 ```
 
-It'll ask for a Gmail address and a verification code. Use `3667` as the code.
-
-By default it looks for music in `/home/Music`. To point it somewhere else, change this line near the top of `music_app.py`:
+Before running, open `pythontify.py` and set `MUSIC_DIR` to wherever your music lives:
 
 ```python
 MUSIC_DIR = "/your/music/folder"
@@ -79,19 +78,18 @@ MUSIC_DIR = "/your/music/folder"
 | `↑` / `↓` | Move through the list |
 | `Enter` | Play selected song |
 | `S` | Stop |
+| `X` | Toggle shuffle |
 | `Q` | Quit |
 
 ---
 
 ## How it's built
 
-Two stages, back to back.
+It uses Python's built-in `curses` module to draw the UI directly in the terminal. The screen refreshes every 500ms so the progress bar ticks forward without you having to press anything, and the music runs as a background process so the UI stays responsive while something's playing.
 
-First is the sign-up flow — plain terminal input, nothing fancy. Once you're through, it hands off to the main player.
+When a song finishes, it looks up the current track's position in the queue, moves to the next one, and starts it automatically. If shuffle is on, the queue is randomized — toggle it off and it resets back to alphabetical order.
 
-The player uses Python's `curses` module to draw and update the UI directly in the terminal. The screen refreshes every 500ms so the progress bar moves smoothly, and the music runs as a background process so the UI never freezes while something's playing.
-
-No external dependencies outside of `ffmpeg` for reading song length. Everything else is standard library.
+No pip installs. No virtual environment. Everything except `ffmpeg` is standard library.
 
 ---
 
