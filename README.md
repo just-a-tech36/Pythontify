@@ -64,7 +64,7 @@ python3 music_app.py
 
 It'll ask for a Gmail address and a verification code. Use `3667` as the code.
 
-By default it looks for music in `/home/elliot/Music`. To point it somewhere else, change this line near the top of `music_app.py`:
+By default it looks for music in `/home/Music`. To point it somewhere else, change this line near the top of `music_app.py`:
 
 ```python
 MUSIC_DIR = "/your/music/folder"
